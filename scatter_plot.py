@@ -24,7 +24,6 @@ def scatter_plot(course_x, course_y, input_dataset):
         plt.ylabel(course_y)
 
     plt.legend()
-    plt.show()
 
 if __name__ == '__main__':
     course = ['Arithmancy', 'Astronomy', 'Herbology',
