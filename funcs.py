@@ -1,6 +1,7 @@
 import math
 from functools import reduce
 
+
 def _min(data):
     return reduce(lambda x, y: y if y < x else x, data)
 
@@ -31,7 +32,7 @@ def _std(data):
         total += (x - m) ** 2
     try:
         return math.sqrt(total / _count(data))
-    except:
+    except ZeroDivisionError:
         return math.nan
 
 
