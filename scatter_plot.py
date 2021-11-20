@@ -1,6 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
+from histogram import histogram
+
 
 def scatter_plot(course_x, course_y, input_dataset):
 
@@ -39,7 +41,8 @@ if __name__ == '__main__':
     for i in range(len(course)):
         for j in range(len(course)):
             if i != j:
-                plt.sca(ax[j, i])
+                plt.sca(ax[i, j])
                 scatter_plot(course[i], course[j], dataset)
             else:
-                ax[j, i].text(0.5, 0.5,'later', fontsize=18, ha='center')
+                plt.sca(ax[i, j])
+                histogram(course[i], dataset)
