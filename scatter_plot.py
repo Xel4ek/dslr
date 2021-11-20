@@ -37,8 +37,6 @@ if __name__ == '__main__':
     dataset = np.genfromtxt('./resources/dataset_train.csv', delimiter=',',
                             names=True, filling_values=None, dtype=None,
                             encoding='UTF-8')
-    # courses = random.sample(course, 2)
-    # scatter_plot(courses[0], courses[1], dataset)
     fig, ax = plt.subplots(len(course), len(course))
     fig.set_size_inches(100, 100)
     fig.subplots_adjust(hspace=0.4, wspace=0.4)
