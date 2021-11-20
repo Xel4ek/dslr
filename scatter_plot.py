@@ -1,5 +1,3 @@
-import random
-
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -26,8 +24,7 @@ def scatter_plot(course_x, course_y, input_dataset):
         plt.ylabel(course_y)
 
     plt.legend()
-    # plt.show()
-    return plt
+    plt.show()
 
 if __name__ == '__main__':
     course = ['Arithmancy', 'Astronomy', 'Herbology',
@@ -43,4 +40,7 @@ if __name__ == '__main__':
     for i in range(len(course)):
         for j in range(len(course)):
             if i != j:
-                scatter_plot(course[i], course[j], dataset).sca(ax[i, j])
+                plt.sca(ax[j, i])
+                scatter_plot(course[i], course[j], dataset)
+            else:
+                ax[j, i].text(0.5, 0.5,'later', fontsize=18, ha='center')
