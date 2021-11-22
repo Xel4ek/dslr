@@ -1,11 +1,11 @@
+import random
+
 import numpy as np
 from matplotlib import pyplot as plt
+from matplotlib.axes import Axes
 
-from histogram import histogram
 
-
-def scatter_plot(course_x, course_y, input_dataset):
-
+def scatter_plot(ax: Axes, courseX, courseY, dataset):
     legend = {
         'F-Test': '',
         'Gryffindor': 'brown',
@@ -15,17 +15,14 @@ def scatter_plot(course_x, course_y, input_dataset):
     for house, color in legend.items():
         if house == 'F-Test':
             continue
-        data = input_dataset[input_dataset['Hogwarts_House'] == house][[course_x, course_y]]
-        data = data[~np.isnan(data[course_x]) & ~np.isnan(data[course_y])]
-        x = data[course_x]
-        x = x[~np.isnan(x)]
-        y = data[course_y]
-        y = y[~np.isnan(y)]
-        plt.scatter(x, y, alpha=0.7, label=house, color=color)
-        plt.xlabel(course_x)
-        plt.ylabel(course_y)
+        data = dataset[dataset['Hogwarts_House'] == house][[courseX, courseY]]
+        data = data[~np.isnan(data[courseX]) & ~np.isnan(data[courseY])]
+        X = data[courseX]
+        X = X[~np.isnan(X)]
+        Y = data[courseY]
+        Y = Y[~np.isnan(Y)]
+        ax.scatter(X, Y, alpha=0.5, label=house, color=color, s=1)
 
-    plt.legend()
 
 if __name__ == '__main__':
     course = ['Arithmancy', 'Astronomy', 'Herbology',
@@ -35,14 +32,11 @@ if __name__ == '__main__':
     dataset = np.genfromtxt('./resources/dataset_train.csv', delimiter=',',
                             names=True, filling_values=None, dtype=None,
                             encoding='UTF-8')
-    fig, ax = plt.subplots(len(course), len(course))
-    fig.set_size_inches(100, 100)
-    fig.subplots_adjust(hspace=0.4, wspace=0.4)
-    for i in range(len(course)):
-        for j in range(len(course)):
-            if i != j:
-                plt.sca(ax[i, j])
-                scatter_plot(course[i], course[j], dataset)
-            else:
-                plt.sca(ax[i, j])
-                histogram(course[i], dataset)
+    courses = random.sample(course, 2)
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.set_xlabel(course[0])
+    ax.set_ylabel(course[1])
+    scatter_plot(ax, courses[0], courses[1], dataset)
+    plt.legend()
+    plt.show()
