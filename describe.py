@@ -22,7 +22,8 @@ def describe(filename):
     print(f'{"":7}\t' + features)
     for k, v in params.items():
         print(f'{k:<7}', end='\t', )
-        data_str = [f'{v(dataset[name]):>{max(len(name), col_width)}.6f}' for name in dataset.dtype.names]
+        data_str = [f'{v(dataset[name]):>{max(len(name), col_width)}.6f}'
+                    for name in dataset.dtype.names]
         print(*data_str, sep=' ')
 
 
