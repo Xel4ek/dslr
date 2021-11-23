@@ -55,4 +55,4 @@ if __name__ == '__main__':
     print(f'Wrong predictions: {sum(y_test != y_pred)}')
     print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
 
-    lr.export_weights(sc)
+    lr.export_weights(sc, courses)

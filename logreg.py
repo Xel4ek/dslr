@@ -74,18 +74,20 @@ class LogisticRegression:
         predictions = self.net_input(x).T
         return [self._classes[x] for x in predictions.argmax(1)]
 
-    def export_weights(self, sc, filename='weights.csv'):
+    def export_weights(self, sc, courses, filename='weights.csv'):
         with open(filename, 'w+') as f:
             for i in range(0, len(self._classes)):
                 f.write(f'{self._classes[i]},')
-            f.write('Mean,Std\n')
+            f.write('Mean,Std,Course\n')
 
             for j in range(0, self._weights.shape[1]):
                 for i in range(0, self._weights.shape[0]):
                     f.write(f'{self._weights[i][j]},')
                 f.write(
                     f'{sc.mean[j - 1] if j > 0 else ""},'
-                    f'{sc.std[j - 1] if j > 0 else ""}\n')
+                    f'{sc.std[j - 1] if j > 0 else ""},'
+                    f'{courses[j - 1] if j != 0 else ""}\n')
+
         return self
 
     def save_model_new(self, sc, features, filename='weights.csv'):

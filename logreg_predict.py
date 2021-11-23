@@ -17,18 +17,12 @@ def method_name():
 if __name__ == '__main__':
     dataset, weights = method_name()
 
-    df = pd.read_csv(dataset)
-    df = df.fillna(method='ffill')
-    courses = [
-      'Defense Against the Dark Arts',
-      'Charms',
-      'Herbology',
-      # 'Divination',
-      'Muggle Studies',
-    ]
-    x = np.array(df[courses].values, dtype=float)
-
+    data = pd.read_csv(dataset)
+    data = data.fillna(method='ffill')
     df = pd.read_csv(weights)
+    x = np.array(data[df.iloc[1:, -1]].values, dtype=float)
+
+    df = df.iloc[:, :-1]
     k = list(df)[:4]
     mean = df.values[1:, 4]
     std = df.values[1:, 5]
