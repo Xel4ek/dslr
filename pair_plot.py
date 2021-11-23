@@ -30,9 +30,9 @@ if __name__ == '__main__':
             else:
                 plt.sca(ax[row, col])
                 histogram(course[row], dataset, legend)
-            if (row == len(course) - 1):
+            if row == len(course) - 1:
                 plt.xlabel(course[col].replace('_', '\n'), wrap=True)
-            if (col == 0):
+            if col == 0:
                 plt.ylabel(course[row].replace('_', '\n'), rotation='vertical')
     plt.legend(legend.keys(), loc=(40, 40))
     plt.show()
