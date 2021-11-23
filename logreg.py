@@ -84,20 +84,10 @@ class LogisticRegression:
                 for i in range(0, self._weights.shape[0]):
                     f.write(f'{self._weights[i][j]},')
                 f.write(
-                    f'{sc.mean[j - 1] if j > 0 else ""},'
-                    f'{sc.std[j - 1] if j > 0 else ""},'
+                    f'{sc.mean[j - 1] if j != 0 else ""},'
+                    f'{sc.std[j - 1] if j != 0 else ""},'
                     f'{courses[j - 1] if j != 0 else ""}\n')
 
-        return self
-
-    def save_model_new(self, sc, features, filename='weights.csv'):
-        with open(filename, 'w+') as f:
-            f.write('Hogwarts_House, beta zero, ' + ', '.join(features) + '\n')
-
-            for i, house in enumerate(self._classes):
-                f.write(','.join([house, *[str(x) for x in self._weights[i]]]) + '\n')
-            f.write('Mean,,' + ','.join([str(x) for x in sc.mean]) + '\n')
-            f.write('Std,,' + ','.join([str(x) for x in sc.std]) + '\n')
         return self
 
 
